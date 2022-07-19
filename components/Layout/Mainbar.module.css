@@ -1,0 +1,62 @@
+.navbar {
+  background-color: #4a707a;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  height: 10vh;
+}
+
+.title:hover,
+.title:focus,
+.title:active {
+  text-decoration: underline;
+}
+
+.title {
+  margin: 0;
+  line-height: 1.15;
+  font-size: 3rem;
+  padding: 1rem;
+}
+
+.title {
+  color: rgba(221,221,218,0.8);
+  font-family: "Courier New", Courier, monospace;
+  font-size: 2.5rem;
+}
+
+.title:hover,
+.title:active {
+  cursor: pointer;
+}
+
+.button-logout {
+  color: rgba(221,221,218,0.8);
+  font-size: 4vw;
+  margin-right: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.button-logout:hover, 
+.button-logout:active {
+  color: rgba(27,46,53,255);
+}
+
+@media screen and (max-width: 700px) {
+  .button-logout {
+    font-size: 8vw;
+  }
+
+  .title {
+    margin: 0;
+    line-height: 1.15;
+    font-size: 2rem;
+  }
+}
+
+/*# sourceMappingURL=Mainbar.module.css.map */

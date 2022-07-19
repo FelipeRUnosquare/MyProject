@@ -1,0 +1,99 @@
+@use '../../utils/' as *
+@import '../../utils/_variables'
+
+.list-container 
+  display: flex,
+  flex-direction: column,
+  align-items: center,
+  justify-items: center,
+
+  @include mobile()
+    margin-top: 10vh,
+    flex-wrap: nowrap,
+    max-width: 80vw,
+
+
+.user-list 
+  text-decoration: none,
+  list-style: none,
+  display: flex,
+  flex-direction: column
+  align-items: center,
+  justify-content: center,
+  max-width: 80vw,
+  margin-top: 10vh
+  animation: show 1s,
+  padding-left: 0
+
+  @include mobile
+    margin-top: 5vh
+
+
+.title 
+  color: $primary-color,
+  text-align: center,
+  font-weight: normal,
+  text-decoration: underline,
+
+.card 
+  border: $boder-default,
+  margin: 0.8rem,
+  width: 50vw,
+  height: 8vh,
+  border-radius: 10px,
+  display: flex,
+  flex-direction: row,
+  align-items: center,
+  justify-content: space-evenly,
+  background-color: $background-color,
+
+  @include medium-screen
+    width: 60vw
+
+  @include mobile
+    width: 80vw
+
+
+  &:hover,
+  &:active 
+    background: $secondary-color,
+    cursor: pointer,
+    animation: hover-card 1s infinite alternate,
+
+  h3 
+    color: rgba(27, 46, 53, 255),
+
+    &:hover,
+    &:active 
+        font-size: 10%,
+
+.user-name 
+  width: 50%
+
+.user-icon 
+  color: rgba(27, 46, 53, 255),
+  font-size: 3rem,
+
+  @include mobile()
+    font-size: 2.5rem,
+
+
+@keyframes hover-card 
+  from 
+    transform: scale(1.1),
+    box-shadow: 2px 5px $background-color,
+  
+  to 
+    transform: scale(1.2),
+    box-shadow: 5px 10px $background-color,
+
+
+
+@keyframes show 
+  from 
+    opacity: 0,
+  to 
+    opacity: 1,
+  
+  
+

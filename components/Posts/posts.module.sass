@@ -1,0 +1,93 @@
+@use '../../utils/' as *
+@import '../../utils/_variables'
+
+.pagination-buttons 
+  width: 80%,
+  height: 40px,
+  list-style: none,
+  display: flex,
+  justify-content: center,
+  margin-top: 5rem,
+  max-width: 40vw,
+
+  @include mobile()
+    height: 30px,
+    margin-top: 2rem,
+
+  a 
+    padding: 10px,
+    margin: 8px,
+    border-radius: 5px,
+    border: 1px solid rgba(27, 46, 53, 255),
+    color: rgba(27, 46, 53, 255),
+    cursor: pointer,
+    background-color: white
+
+    @include mobile()
+        padding: 5px,
+        margin: 2px,
+
+
+    &:hover 
+        color: rgba(213,248,229,255),
+        background-color: rgba(27, 46, 53, 255),
+        animation: hover-button 1s,
+
+
+.pagination-active a 
+  color: rgba(213,248,229,255),
+  background-color: rgba(27, 46, 53, 255),
+
+
+.pagination-disabled 
+  color: grey,
+
+
+.post 
+  margin: 1rem,
+  width: 70vw,
+  height: 50vh,
+  border-radius: 20px,
+  padding: 1rem,
+  background-color: $background-color
+
+  @include mobile()
+    border: none,
+    width: 90vw
+
+
+.post-title 
+  width: 100%,
+  text-align: center,
+  animation: 1s slidein ease-in-out,
+  text-transform: capitalize
+
+  @include mobile()
+    font-size: 1.8rem,
+
+
+.post-body 
+  height: 100%,
+  align-items: center,
+  padding: 10%,
+  font-size: 1.5rem,
+  text-align: center,
+  animation: 1.5s slidein ease-in-out,
+
+  @include mobile()
+    font-size: 1.2rem,
+
+
+@keyframes slidein 
+  from 
+    opacity: 0,
+  to 
+    opacity: 1,
+
+
+@keyframes hover-button 
+  from 
+    opacity: 0.5,
+  to 
+    opacity: 1,
+  
