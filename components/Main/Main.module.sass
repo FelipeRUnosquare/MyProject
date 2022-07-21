@@ -1,0 +1,87 @@
+@use '../../utils/' as *
+@import '../../utils/_variables'
+.login-form 
+  display: flex,
+  flex-direction: column,
+  align-items: center,
+  
+
+.form-container 
+  @extend .login-form
+  width: 50vw,
+  max-width: 10vw,
+
+  @include mobile()
+    border: $boder-default,
+    background: #FFF,
+    position: fixed,
+    padding: 2rem,
+    border-radius: 10px,
+    width: 90vw,
+    max-width: 100vw,
+
+
+  h1 
+    font-family: 'Courier New', Courier, monospace,
+    font-size: 3rem,
+
+    @include mobile()
+      font-size: 8vw
+
+
+.button 
+  border: 1px solid black,
+  width: 15vw,
+  height: 5vh,
+  background: $primary-color,
+  color: $secondary-color,
+  border-radius: 4px,
+  cursor: pointer,
+ 
+  
+  &:hover,
+  &:active 
+    box-shadow: 1px 1px 1px $primary-color,
+    background: $background-color,
+    animation: scale-button 1s infinite ease-out,
+    color: $primary-color
+
+  @include mobile()
+    width: 80%,
+  
+.input
+  margin: 2rem,
+  width: 20vw,
+  height: 5vh,
+  padding: 5px,
+  border-radius: 4px,
+  font-size: 1rem,
+
+  @include mobile() 
+    width: 80%,
+
+  &:hover,
+  &:active 
+    border: $boder-default
+
+  &:focus 
+    outline: none,
+    color: $primary-color
+    transform: scale(1.2)
+
+.input-error
+  @extend .input,
+  border: 1px solid red,
+  animation: scale-button 1s
+
+@keyframes scale-button
+  0% 
+    transform: scale(1),
+  100%
+    transform: scale(1.1)
+
+@keyframes login
+  0% 
+    opacity: 0,
+  100%
+    opacity: 1,

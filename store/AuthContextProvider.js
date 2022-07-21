@@ -18,14 +18,29 @@ const AuthContextProvider = (props) => {
   const logoutHandler = () => {
     localStorage.removeItem("isLoggedIn");
     setIsLoggedIn(false);
-    router.push('/')
+    router.push("/");
   };
 
-  const loginHandler = () => {
-    localStorage.setItem("isLoggedIn", true);
-    setIsLoggedIn(true);
-    router.push("/home");
+  const loginHandler = async (username) => {
+    try {
+      const response = await fetch(
+        "https://jsonplaceholder.typicode.com/users/1"
+      );
+      const userAccepted = await response.json();
+      console.log(userAccepted.email);
+      if (userAccepted.email === username) {
+        localStorage.setItem("isLoggedIn", true);
+        setIsLoggedIn(true);
+        router.push("/home");
+      } else {
+        throw new Error("Not Authorized, please contact the Administrator");
+      }
+    } catch (e) {
+      return e;
+    }
   };
+
+  const closeErrorHandler = () => {};
 
   return (
     <AuthContext.Provider
@@ -33,6 +48,7 @@ const AuthContextProvider = (props) => {
         isLoggedIn: isLoggedIn,
         onLogin: loginHandler,
         onLogout: logoutHandler,
+        onCloseError: closeErrorHandler,
       }}
     >
       {props.children}

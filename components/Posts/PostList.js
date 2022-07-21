@@ -16,7 +16,7 @@ const PostList = (props) => {
   const displayPosts = postsData
     .slice(pagesVisited, pagesVisited + postPerPage)
     .map((post) => {
-      return <PostItem key={post.id} title={post.title} body={post.body} />;
+      return <PostItem key={post.id} title={post.title} body={post.body} id={post.id}/>;
     });
 
   let pageCount = Math.ceil(postsData.length / postPerPage);

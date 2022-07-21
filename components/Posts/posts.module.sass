@@ -2,13 +2,14 @@
 @import '../../utils/_variables'
 
 .pagination-buttons 
-  width: 80%,
+  width: 80vw,
   height: 40px,
   list-style: none,
+  padding: 0,
   display: flex,
   justify-content: center,
   margin-top: 5rem,
-  max-width: 40vw,
+  max-width: 80vw,
 
   @include mobile()
     height: 30px,
@@ -49,7 +50,8 @@
   height: 50vh,
   border-radius: 20px,
   padding: 1rem,
-  background-color: $background-color
+  background-color: $background-color,
+  position: relative
 
   @include mobile()
     border: none,
@@ -58,6 +60,7 @@
 
 .post-title 
   width: 100%,
+  height: 20%
   text-align: center,
   animation: 1s slidein ease-in-out,
   text-transform: capitalize
@@ -65,11 +68,10 @@
   @include mobile()
     font-size: 1.8rem,
 
-
 .post-body 
-  height: 100%,
+  height: 50%,
   align-items: center,
-  padding: 10%,
+  padding: 5%,
   font-size: 1.5rem,
   text-align: center,
   animation: 1.5s slidein ease-in-out,
@@ -77,7 +79,62 @@
   @include mobile()
     font-size: 1.2rem,
 
+.post-actions 
+  position: absolute,
+  bottom: 10px,
+  left: 35%
+  width: 30%,
+  display: flex,
+  flex-direction: row,
+  justify-content: space-evenly
 
+.edit-form 
+  height: 100%
+  display: flex,
+  flex-direction: column
+  align-items: center
+  animation: 1s slidein ease-in-out,
+
+.input
+  width: 80%
+  height: 40%
+  margin: 0.5rem
+  max-width: 80%
+  border-radius: 20px
+  padding: 10px
+  font-family: 'default'
+  font-size: 1rem,
+  animation: 1s slidein ease-in-out,
+
+  &:focus 
+    outline: none,
+    color: $primary-color
+
+.button 
+  border: 1px solid black,
+  width: 50px,
+  height: 30px,
+  margin: 10px,
+  background: $primary-color,
+  color: $secondary-color,
+  border-radius: 4px,
+  cursor: pointer,
+
+  &:hover,
+  &:active 
+    box-shadow: 1px 1px 1px $primary-color,
+    background: $background-color,
+    animation: scale-button 1s infinite ease-out,
+    color: $primary-color
+
+.button-edit 
+  @extend .button
+  background: $warning-color
+
+.button-delete
+  @extend .button
+  background: $danger-color
+  
 @keyframes slidein 
   from 
     opacity: 0,
@@ -90,4 +147,10 @@
     opacity: 0.5,
   to 
     opacity: 1,
+
+@keyframes scale-button
+  0% 
+    transform: scale(1),
+  100%
+    transform: scale(1.1)
   

@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { useContext } from "react";
 import AuthContext from "../../store/auth-context";
-import styles from "./Mainbar.module.css";
+import styles from "./Layout.module.sass";
 
 const Mainbar = () => {
   const router = useRouter()

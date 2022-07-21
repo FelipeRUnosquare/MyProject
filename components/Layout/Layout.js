@@ -2,7 +2,7 @@ import { useContext } from "react";
 import AuthContext from "../../store/auth-context";
 import Mainbar from "./Mainbar";
 import Head from "next/head";
-import styles from './Layout.module.css'
+import styles from './Layout.module.sass'
 
 const Layout = (props) => {
   const ctx = useContext(AuthContext);
