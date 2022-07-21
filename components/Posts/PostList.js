@@ -1,13 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PostItem from "./PostItem";
 import ReactPaginate from "react-paginate";
 import styles from "./posts.module.sass";
 
 const PostList = (props) => {
-  const [postsData, setPostsData] = useState(
-    props.userPostData.length > 0 ? props.userPostData.slice(0, 10) : []
-  );
+  const [postsData, setPostsData] = useState([]);
   const [pageNumber, setPageNumber] = useState(0);
+
+  useEffect(() => {
+    setPostsData(
+      props.userPostData.length > 0
+        ? props.userPostData.slice(0, props.userPostData.length)
+        : []
+    );
+  }, [props.userPostData]);
 
   const postPerPage = 1;
 
@@ -16,7 +22,7 @@ const PostList = (props) => {
   const displayPosts = postsData
     .slice(pagesVisited, pagesVisited + postPerPage)
     .map((post) => {
-      return <PostItem key={post.id} title={post.title} body={post.body} id={post.id}/>;
+      return <PostItem key={post.id} data={post} />;
     });
 
   let pageCount = Math.ceil(postsData.length / postPerPage);

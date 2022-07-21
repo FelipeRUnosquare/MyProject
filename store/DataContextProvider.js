@@ -1,39 +1,19 @@
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Modal from "../components/UI/Modal";
 import DataContext from "./data-context";
 
 const DataContextProvider = (props) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
+  const [postData, setPostData] = useState([]);
+  const [userList, setUserList] = useState([]);
+  const [singlePostData, setSinglePostData] = useState([]);
   const [isError, setIsError] = useState(false);
   const [idToDelete, setIdToDelete] = useState(null);
   const [modalMessage, setModalMessage] = useState("");
   const [warning, setWarning] = useState(false);
 
-  const handleEditPost = async (data) => {
-    try {
-      const requestOptions = {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      };
-      const response = await fetch(
-        `https://jsonplaceholder.typicode.com/posts/${data.id}`,
-        requestOptions
-      );
-      if (!response.ok) {
-        throw Error("An error has ocurred");
-      } else {
-        setModalMessage("Post edited successfully");
-      }
-      router.push("/home");
-    } catch (error) {
-      router.push("/home");
-      setIsError(true);
-      setModalMessage(error.message);
-    }
-  };
   const handleWarningDeletePost = (id) => {
     setWarning(true);
     setModalMessage("Are you sure you want to delete this post?");
@@ -52,7 +32,63 @@ const DataContextProvider = (props) => {
     setModalMessage("");
   };
 
-  const handleAcceptAction = async () => {
+  const getPostData = async (idUser) => {
+    try {
+      setIsLoading(true);
+      const postData = await fetch(
+        `https://jsonplaceholder.typicode.com/posts?userId=${idUser}`
+      ).then((response) => response.json());
+      setPostData(postData);
+      setIsLoading(false);
+    } catch (error) {
+      handleError(error.message);
+    }
+  };
+
+  const getUsersData = async () => {
+    try {
+      setIsLoading(true)
+      const usersData = await fetch(
+        "https://jsonplaceholder.typicode.com/users"
+      ).then((response) => response.json());
+      setIsLoading(false);
+      setUserList(usersData);
+    } catch (error) {
+      handleError(error.message);
+    }
+  };
+
+  const handleEditPost = async (data) => {
+    try {
+      const requestOptions = {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      };
+      const response = await fetch(
+        `https://jsonplaceholder.typicode.com/posts/${data.id}`,
+        requestOptions
+      );
+      if (!response.ok) {
+        throw Error("An error has ocurred");
+      }
+      setPostData(prevPostData => prevPostData.map((post) => {
+        if (post.id === data.id) {
+          post.title = data.title,
+          post.body = data.body
+        }
+        return post
+      }))
+      setModalMessage("Post edited successfully");
+      router.back();
+    } catch (error) {
+      router.push("/home");
+      setIsError(true);
+      setModalMessage(error.message);
+    }
+  };
+
+  const handleDeletePost = async () => {
     try {
       const response = await fetch(
         `https://jsonplaceholder.typicode.com/posts/${idToDelete}`,
@@ -64,6 +100,9 @@ const DataContextProvider = (props) => {
         throw Error("An error has ocurred");
       }
       setWarning(false);
+      setPostData((prevPostData) =>
+          prevPostData.filter((postData) => postData.id !== idToDelete)
+        );
       setModalMessage("Post deleted successfully");
     } catch (error) {
       setIsError(true);
@@ -76,9 +115,15 @@ const DataContextProvider = (props) => {
       value={{
         onEditPost: handleEditPost,
         onWarningDeletePost: handleWarningDeletePost,
-        isLoading: isLoading,
+        onGetPostData: getPostData,
+        onGetUserData: getUsersData,
         onError: handleError,
+        onSelectPostToEdit: (post) => setSinglePostData(post),
         onLoading: (loading) => setIsLoading(loading),
+        userList: userList,
+        postData: postData,
+        singlePostData: singlePostData,
+        isLoading: isLoading,
       }}
     >
       {props.children}
@@ -87,7 +132,7 @@ const DataContextProvider = (props) => {
           error={isError}
           message={modalMessage}
           onCloseModal={handleCloseModal}
-          onAcceptAction={handleAcceptAction}
+          onAcceptAction={handleDeletePost}
           warning={warning}
         />
       )}

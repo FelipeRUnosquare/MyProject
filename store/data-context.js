@@ -3,9 +3,15 @@ import React from "react";
 const DataContext = React.createContext({
    onEditPost: () => {},
    onDeletePost: () => {},
-   isLoading: null,
    onError: () => {},
-   onLoading: () => {}
+   onLoading: () => {},
+   onGetPostData: () => {},
+   onGetUserData: () => {},
+   onHandleEditPost: () => {},
+   userList: [],
+   postData: [],
+   singlePostData: [],
+   isLoading: null,
 })
 
 export default DataContext;

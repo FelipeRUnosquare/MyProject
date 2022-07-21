@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext } from "react";
 import LoginForm from "../components/Main/LoginForm";
 import Spinner from "../components/UI/Spinner";
 import AuthContext from "../store/auth-context";
@@ -10,10 +10,11 @@ export default function Login() {
   const dataCtx = useContext(DataContext);
 
   const handleLogin = async (username) => {
-    dataCtx.onLoading(true)
+    dataCtx.onLoading(true);
     const fetchLogin = await authCtx.onLogin(username);
     if (fetchLogin) {
-      dataCtx.onError(fetchLogin.message)
+      dataCtx.onError(fetchLogin.message);
+      return
     }
   };
 
