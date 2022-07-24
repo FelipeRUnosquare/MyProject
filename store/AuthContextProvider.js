@@ -40,15 +40,12 @@ const AuthContextProvider = (props) => {
     }
   };
 
-  const closeErrorHandler = () => {};
-
   return (
     <AuthContext.Provider
       value={{
         isLoggedIn: isLoggedIn,
         onLogin: loginHandler,
         onLogout: logoutHandler,
-        onCloseError: closeErrorHandler,
       }}
     >
       {props.children}

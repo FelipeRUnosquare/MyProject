@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Modal from "../components/UI/Modal";
 import DataContext from "./data-context";
 
@@ -51,8 +51,8 @@ const DataContextProvider = (props) => {
       const usersData = await fetch(
         "https://jsonplaceholder.typicode.com/users"
       ).then((response) => response.json());
-      setIsLoading(false);
       setUserList(usersData);
+      setIsLoading(false);
     } catch (error) {
       handleError(error.message);
     }

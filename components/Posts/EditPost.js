@@ -29,6 +29,7 @@ const EditPost = (props) => {
         <textarea
           className={styles.input}
           value={title}
+          placeholder="title"
           onChange={handleChangeTitle}
         ></textarea>
         <label>Post</label>
